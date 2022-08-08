@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cD/7WmvlOLl+qqkJnP/y1oCu7cKDF4cOruN7GSa/LlXkjDb0MX+xoDs5LJLlSywteQmgyi7aB5iPxOUyHJIZ+A==",
+  "dgSpecHash": "tZZ2wKV2RflTpg87Cymtez2eqc7dY2N9f/5OGMyC5ia1B9gr3mEg+v1Ny0NfmmYhL9B8D3Ev80dZIyjUlo6Lng==",
   "success": true,
-  "projectFilePath": "E:\\ApiManagerStudent\\ApiManagerStudent\\ApiManagerStudent.csproj",
+  "projectFilePath": "E:\\ApiMangerStudent\\ApiManagerStudent\\ApiManagerStudent.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HP\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.17\\microsoft.aspnetcore.authentication.jwtbearer.5.0.17.nupkg.sha512",

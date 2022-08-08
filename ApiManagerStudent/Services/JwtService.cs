@@ -49,10 +49,11 @@ namespace ApiManagerStudent.Services
 
         private async Task<AuthResponse> SaveTokenDetails(string ipAddress, int userId, string tokenString, string refreshToken)
         {
+            var day = _configuration.GetValue<int>("JwtSettings:Day");
             var userRefreshToken = new UserRefreshToken
             {
                 CreatedDate = DateTime.UtcNow,
-                ExpirationDate = DateTime.UtcNow.AddDays(5),
+                ExpirationDate = DateTime.UtcNow.AddDays(day),
                 IpAddress = ipAddress,
                 IsInvalidated = false,
                 RefreshToken = refreshToken,
@@ -61,7 +62,7 @@ namespace ApiManagerStudent.Services
             };
             await _context.UserRefreshTokens.AddAsync(userRefreshToken);
             await _context.SaveChangesAsync();
-            return new AuthResponse { Token = tokenString, RefreshToken = refreshToken, IsSuccess = true };
+            return new AuthResponse { Token = tokenString, RefreshToken = refreshToken, IsSuccess = true,Day=day };
         }
 
         private string GenerateRefreshToken()
@@ -88,7 +89,7 @@ namespace ApiManagerStudent.Services
                 {
                     new Claim(ClaimTypes.NameIdentifier, user.Id+""),
                 }),
-                Expires = DateTime.UtcNow.AddSeconds(30),
+                Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(keyBytes),
                SecurityAlgorithms.HmacSha256)
             };

@@ -19,6 +19,7 @@ namespace ApiManagerStudent.Controllers
     [EnableCors("MyPolicy")]
     public class TeacherController : ControllerBase
     {
+        private const string PASSWORD_RESET = "12345";
         private readonly ManagerStudentContext db;
         public TeacherController(ManagerStudentContext db)
         {
@@ -39,7 +40,30 @@ namespace ApiManagerStudent.Controllers
                 totalItems = db.Teachers.Count()
             });
         }
-
+        [HttpPut("[action]/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> ResetPassword(int id)
+        {
+            var teacher = await db.Teachers.FindAsync(id);
+            if (teacher != null)
+            {
+                teacher.Password = Libary.Instances.EncodeMD5(PASSWORD_RESET);
+                db.Entry(teacher).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return Ok(new
+                {
+                    message = "Reset password success.Password: 12345"
+                });
+            }
+            else
+            {
+                return BadRequest(new
+                {
+                    error = "Object teacher not found by id to reset."
+                });
+            }
+        }
 
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(TeacherDTO), StatusCodes.Status200OK)]
@@ -49,7 +73,7 @@ namespace ApiManagerStudent.Controllers
             var teacher = await db.Teachers.FindAsync(id);
             return teacher == null ? NotFound(new
             {
-                error = "Subject teacher not found by id to get."
+                error = "Object teacher not found by id to get."
             }) : Ok(new TeacherDTO(teacher));
         }
 
@@ -77,8 +101,8 @@ namespace ApiManagerStudent.Controllers
               || x.Username.ToLower().Trim().Equals(q)
               || x.IdRoleNavigation.Name.ToLower().Trim().Contains(q)
               );
-           await teachers.Skip((page - 1) * pagesize).Take(pagesize)
-                .ForEachAsync(x => list.Add(new TeacherDTO(x)));
+            await teachers.Skip((page - 1) * pagesize).Take(pagesize)
+                 .ForEachAsync(x => list.Add(new TeacherDTO(x)));
             return new ObjectResult(new
             {
                 data = list,
@@ -124,7 +148,32 @@ namespace ApiManagerStudent.Controllers
             }
 
         }
-
+        [HttpPut("[action]/{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> ChangePass(int id, ChangePassword changePassword)
+        {
+            var teacher = await db.Teachers.SingleOrDefaultAsync(x => x.Id == id && x.Password.Equals(changePassword.password));
+            if (teacher != null)
+            {
+                if (!changePassword.newPassword.Equals(changePassword.prePassword))
+                    return BadRequest(new
+                    {
+                        error = "Confirm password is incorrect."
+                    });
+                teacher.Password = changePassword.newPassword;
+                db.Entry(teacher).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return NoContent();
+            }
+            else
+            {
+                return BadRequest(new
+                {
+                    error = "Password is incorrect."
+                });
+            }
+        }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -139,8 +188,8 @@ namespace ApiManagerStudent.Controllers
                     DateOfBirth = teacherDTO.DateOfBirth,
                     IdRole = teacherDTO.IdRole,
                     Image = teacherDTO.Image,
-                    Username=teacherDTO.Username,
-                    Password=Libary.Instances.EncodeMD5("12345")
+                    Username = teacherDTO.Username,
+                    Password = Libary.Instances.EncodeMD5("12345")
                 });
                 await db.SaveChangesAsync();
 
@@ -157,6 +206,7 @@ namespace ApiManagerStudent.Controllers
             }
 
         }
+
 
 
         [HttpDelete("{id}")]
@@ -186,6 +236,6 @@ namespace ApiManagerStudent.Controllers
             }
         }
 
-      
+
     }
 }

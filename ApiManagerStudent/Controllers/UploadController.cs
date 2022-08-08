@@ -26,17 +26,17 @@ namespace ApiManagerStudent.Controllers
         {
             if (file != null && file.Length > 0)
             {
+                var index = file.FileName.LastIndexOf('.');
+                var fileName = file.FileName.Substring(0, index) + DateTime.Now.Ticks + file.FileName.Substring(index);
                 string directoryPath = Path.Combine(webHostEnvironment.ContentRootPath, "Images");
-                string filePath = Path.Combine(directoryPath, file.FileName);
+                string filePath = Path.Combine(directoryPath, fileName);
                 using (var stream = new FileStream(filePath, FileMode.Create)) {
                     file.CopyTo(stream);
                 }
-                  
-
                 return new ObjectResult(new
                 {
                     status = true,
-                    filename = "Images/" + file.FileName
+                    filename = "Images/" + fileName
                 });
             }
             return BadRequest(new { 

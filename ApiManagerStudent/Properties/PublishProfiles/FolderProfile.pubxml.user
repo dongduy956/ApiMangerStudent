@@ -5,6 +5,12 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>E:\MangerStudentApi</_PublishTargetUrl>
-    <History>True|2022-07-17T16:39:18.6924167Z;</History>
+    <History>True|2022-08-08T11:36:53.4234789Z;True|2022-08-08T10:03:32.5389383+07:00;True|2022-08-08T09:26:45.0462081+07:00;True|2022-08-07T20:57:15.6364377+07:00;True|2022-08-07T19:22:58.8541566+07:00;True|2022-07-17T23:39:18.6924167+07:00;</History>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
   </PropertyGroup>
+  <ItemGroup>
+    <EFMigrations Include="ApiManagerStudent.EF.ManagerStudentContext">
+      <Value>Data Source=sql.bsite.net\MSSQL2016%3bInitial Catalog=apistudent_%3bIntegrated Security=false%3buid=apistudent_%3bpwd=12345</Value>
+    </EFMigrations>
+  </ItemGroup>
 </Project>

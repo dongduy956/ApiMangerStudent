@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\ApiManagerStudent\\ApiManagerStudent\\ApiManagerStudent.csproj": {}
+    "E:\\ApiMangerStudent\\ApiManagerStudent\\ApiManagerStudent.csproj": {}
   },
   "projects": {
-    "E:\\ApiManagerStudent\\ApiManagerStudent\\ApiManagerStudent.csproj": {
+    "E:\\ApiMangerStudent\\ApiManagerStudent\\ApiManagerStudent.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\ApiManagerStudent\\ApiManagerStudent\\ApiManagerStudent.csproj",
+        "projectUniqueName": "E:\\ApiMangerStudent\\ApiManagerStudent\\ApiManagerStudent.csproj",
         "projectName": "ApiManagerStudent",
-        "projectPath": "E:\\ApiManagerStudent\\ApiManagerStudent\\ApiManagerStudent.csproj",
+        "projectPath": "E:\\ApiMangerStudent\\ApiManagerStudent\\ApiManagerStudent.csproj",
         "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "E:\\ApiManagerStudent\\ApiManagerStudent\\obj\\",
+        "outputPath": "E:\\ApiMangerStudent\\ApiManagerStudent\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
